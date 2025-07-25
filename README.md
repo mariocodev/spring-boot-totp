@@ -1,12 +1,12 @@
 # 🚀 Spring Boot TOTP Authentication System
 
-<center>
+<div style="text-align: center">
 
 ![Java](https://img.shields.io/badge/Java-17%2B-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.1%2B-brightgreen)
 ![H2 Database](https://img.shields.io/badge/H2-Database-lightgrey)
 
-</center>
+</div>
 
 Implementación de autenticación TOTP (Time-Based One-Time Password) en Spring Boot y H2 Database
 
@@ -26,7 +26,7 @@ Implementación de autenticación TOTP (Time-Based One-Time Password) en Spring 
 src/
 ├── main/
 │ ├── java/
-│ │ └── com/totp/demo
+│ │ └── com/demo/totp
 │ │ ├── controller/ # Controladores REST
 │ │ ├── dto/ # Objetos de Transferencia
 │ │ ├── model/ # Entidades
@@ -34,7 +34,7 @@ src/
 │ │ ├── service/ # Lógica de negocio
 │ │ └── TotpApplication.java
 │ └── resources/
-│ ├── application.properties
+│ ├── application.yml
 │ └── static/ # Recursos estáticos
 └── test/ # Pruebas
 
@@ -50,10 +50,12 @@ src/
 
 ### Pasos:
 
+Copiar el archivo denominado `application-example.yml` que se encuentra en el directorio `src/main/resource`s y renombrarlo como el environment seleccionado a levantar, ejemplo `application-local.yml`. Modificar los valores de las propiedades por los del ambiente local.
+
 1. **Iniciar la aplicación**:
 
 ```bash
-   mvn spring-boot:run   
+   mvn spring-boot:run -P local
 ```
 
 2. **Configurar TOTP para un usuario**:
@@ -77,10 +79,10 @@ Ejemplo: http://localhost:8080/api/totp/qr/usuario1
     POST /api/totp/validate
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter  | Type     | Description                       |
+|:-----------| :------- | :-------------------------------- |
 | `username` | `string` | **Required**. Nombre del usuario |
-| `idcode` | `string` | **Required**. Código generado en aplicación TOTP |
+| `code`     | `string` | **Required**. Código generado en aplicación TOTP |
 
 Ejemplo:
 * Body: {"username": "usuario1", "code": "123456"}
