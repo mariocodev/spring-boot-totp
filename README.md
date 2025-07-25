@@ -73,7 +73,12 @@ Ejemplo: http://localhost:8080/api/totp/setup/usuario1
 
 Ejemplo: http://localhost:8080/api/totp/qr/usuario1
 
+> [!NOTE]
+> Puedes escanear el QR con Google Authenticator, Microsoft Authenticator o cualquier otra app compatible y probar la validación de los códigos de 6 dígitos.
+
 4. **Validar código**:
+
+Puedes utilizar aplicaciones como Postman con los siguientes valores.
 
 ```http
     POST /api/totp/validate
@@ -87,10 +92,22 @@ Ejemplo: http://localhost:8080/api/totp/qr/usuario1
 Ejemplo:
 * Body: {"username": "usuario1", "code": "123456"}
 
+También vía cURL
+
+```bash
+
+curl --location 'http://localhost:8080/api/totp/validate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "usuario1",
+    "code": "654321"
+}'
+
+```
 
 ## 🖥 Acceso a la Consola H2
 
-Durante el desarrollo, accede a la consola H2:
+Accede a la consola H2:
 
 * URL: http://localhost:8080/h2-console
 * Credenciales:
@@ -122,5 +139,6 @@ Esta implementación proporciona una solución completa con:
 * Documentación de métodos
 * Uso de Lombok para reducir código boilerplate
 * Persistencia con H2 (en memoria)
+  * Este enfoque da persistencia entre reinicios de la aplicación sin necesidad de una base de datos pesada.
 * Generación y validación de códigos TOTP
 * Generación de QR codes
