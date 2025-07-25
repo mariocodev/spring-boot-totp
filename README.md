@@ -1,6 +1,3 @@
-# spring-boot-totp
-Implementación de autenticación TOTP (Time-Based One-Time Password) en Spring Boot
-
 # 🚀 Spring Boot TOTP Authentication System
 
 <center>
@@ -19,10 +16,12 @@ Implementación de autenticación TOTP (Time-Based One-Time Password) en Spring 
 2. [Cómo Probar la Aplicación](#-cómo-probar-la-aplicación)
 3. [Acceso a la Consola H2](#-acceso-a-la-consola-h2)
 4. [Endpoints API](#-endpoints-api)
+5. [Tecnologías utilizadas](#-tecnologías-utilizadas)
+6. [Consideraciones](#-consideraciones)
 
 ## 🏗 Estructura del Proyecto
 
-```
+```bash
 
 src/
 ├── main/
@@ -54,44 +53,50 @@ src/
 1. **Iniciar la aplicación**:
 
 ```bash
-   mvn spring-boot:run
-   
+   mvn spring-boot:run   
 ```
 
-2. ***Configurar TOTP para un usuario**:
+2. **Configurar TOTP para un usuario**:
 
 ```http
     GET /api/totp/setup/{username}
-    Ejemplo: http://localhost:8080/api/totp/setup/usuario1
 ```
+Ejemplo: http://localhost:8080/api/totp/setup/usuario1
 
 3. **Obtener código QR**:
 
 ```http
-
     GET /api/totp/qr/{username}
-    Ejemplo: http://localhost:8080/api/totp/qr/usuario1
-
 ```
+
+Ejemplo: http://localhost:8080/api/totp/qr/usuario1
 
 4. **Validar código**:
 
 ```http
     POST /api/totp/validate
-    Body: {"username": "usuario1", "code": "123456"}
 ```
 
-## 🖥 Acceso a la Consola H2 <a name="-acceso-a-la-consola-h2"></a>
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `username` | `string` | **Required**. Nombre del usuario |
+| `idcode` | `string` | **Required**. Código generado en aplicación TOTP |
+
+Ejemplo:
+* Body: {"username": "usuario1", "code": "123456"}
+
+
+## 🖥 Acceso a la Consola H2
 
 Durante el desarrollo, accede a la consola H2:
 
 * URL: http://localhost:8080/h2-console
 * Credenciales:
-   - JDBC URL: jdbc:h2:mem:totpdb
-   - User: sa
-   - Password: (dejar vacío)
+  - JDBC URL: jdbc:h2:mem:totpdb
+  - User: sa
+  - Password: (dejar vacío)
 
-## 📡 Endpoints API <a name="-endpoints-api"></a>
+## 📡 Endpoints API
 
 | Método | Endpoint | Descripción |
 | :----- | :------- | :---------- |
@@ -107,7 +112,9 @@ Durante el desarrollo, accede a la consola H2:
 * ZXing (generación de códigos QR)
 * Java OTP (implementación TOTP)
 
-## Esta implementación proporciona una solución completa con:
+## ⚡️ Consideraciones
+
+Esta implementación proporciona una solución completa con:
 
 * Arquitectura por capas bien definida
 * Documentación de métodos
